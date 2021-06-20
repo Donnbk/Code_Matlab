@@ -7,14 +7,14 @@ clc; close all;
 A = 2;
 w1 = 1; k1 = 1  ; phi_01 = 1;
 w2 = 2; k2 = 1.1; phi_02 = 2; 
-t_start = 0; t_end = 20; dt_iter = 0.1;
+t_start = 0; t_end = 20; dt_iter = 0.1; t_iter = 0;
 x_start = -50; x_end = 50; dx_iter = 0.5; x_iter = 0;
 x_start_fig = x_start;  
 %%
 % Create vector for phi_x,f1,f2,f3
 n_x = round((x_end-x_start)/dx_iter) + 1; %number of frames
 x = zeros(1,n_x); f1 = zeros(1,n_x); f2 = zeros(1,n_x);f3 = zeros(1,n_x);
-m_t = round((t_end-t_start)/dt_iter) + 1;
+m_t = round((t_end-t_iter)/dt_iter) + 1;
 T_matrix = zeros(m_t,1); f3_t = zeros(m_t,n_x);
 %%
 % Create a video
@@ -22,8 +22,9 @@ video = VideoWriter('waves_v2.avi');
 open(video);
 % Set figure
 figure('Position',[200 200 800 800]);
+t_iter = t_start;
 for j = 1:m_t
-    t = t_start;
+    t = t_iter;
     T_matrix(j,1) = t;
     x_iter = x_start;
     for i=1:n_x
@@ -88,7 +89,7 @@ for j = 1:m_t
     plot(x(j),f3_t(j,j),'k-o','MarkerFaceColor',[1 0 1]); 
     plot(x(j),enve_f3_positive(j),'k-o','MarkerFaceColor','g');
     hold off
-    t_start = t_start + dt_iter;
+    t_iter = t_iter + dt_iter;
     %
     pause(0.01)
     frame = getframe(gcf); 
