@@ -10,7 +10,7 @@ w2 = 2; k2 = 1.1; phi_02 = 2;
 t = 1; 
 x_start = 0; x_end = 150; dx_iter = 0.2; x_iter = 0;
 %%
-% Create vector for phi_x,f1,f2,f3
+% Create vector for x, f1, f2, f3
 n = round((x_end-x_start)/dx_iter); %number of frames
 x = zeros(1,n); f1 = zeros(1,n); f2 = zeros(1,n);f3 = zeros(1,n);
 %%
