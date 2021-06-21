@@ -8,8 +8,7 @@ A = 2;
 w1 = 1; k1 = 1  ; phi_01 = 1;
 w2 = 2; k2 = 1.1; phi_02 = 2; 
 t_start = 0; t_end = 20; dt_iter = 0.1; t_iter = 0;
-x_start = -50; x_end = 50; dx_iter = 0.5; x_iter = 0;
-x_start_fig = x_start;  
+x_start = -50; x_end = 50; dx_iter = 0.5; x_iter = 0; 
 %%
 % Create vector for x,f1, f2, f3, T_matrix
 n_x = round((x_end-x_start)/dx_iter) + 1; %number of frames
@@ -43,7 +42,7 @@ for j = 1:m_t
     plot(x(1:i),f1(1:i),'r', 'LineWidth', 1);
     hold on
     xlabel('x','fontweight','bold','fontsize',10); 
-    xlim([x_start_fig x_end]);xticks(x_start_fig:10:x_end);
+    xlim([x_start x_end]);xticks(x_start:10:x_end);
     ylabel('f_{1}','fontweight','bold','fontsize',10); 
     ylim([-3 3]);yticks(-3:1:3);
     title('f_{1}(\phi) = Acos(\omega_{1}t - k_{1}x - \phi_{01}), {\phi}(x,t)');
@@ -54,7 +53,7 @@ for j = 1:m_t
     hold on
     plot(x(1:i),f2(1:i),'b', 'LineWidth', 1);
     xlabel('x','fontweight','bold','fontsize',10); 
-    xlim([x_start_fig x_end]);xticks(x_start_fig:10:x_end);
+    xlim([x_start x_end]);xticks(x_start:10:x_end);
     ylabel('f_{2}','fontweight','bold','fontsize',10); 
     ylim([-3 3]);yticks(-3:1:3);
     title('f_{2}(\phi) = Acos(\omega_{2}t - k_{2}x - \phi_{02}), {\phi}(x,t)');
@@ -67,7 +66,7 @@ for j = 1:m_t
     plot(x(1:i),enve_f3_negative(1:i),'b--', 'LineWidth', 0.75);
     %
     xlabel('x','fontweight','bold','fontsize',10); 
-    xlim([x_start_fig x_end]);xticks(x_start_fig:10:x_end);
+    xlim([x_start x_end]);xticks(x_start:10:x_end);
     ylabel('f_{3}','fontweight','bold','fontsize',10); 
     ylim([-5 5]);yticks(-5:1:5);
     title('f_{3}(\phi) = f_{2}(\phi) + f_{1}(\phi), {\phi}(x,t)');
