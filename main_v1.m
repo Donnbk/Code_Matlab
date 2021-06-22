@@ -31,41 +31,41 @@ for i=1:n
 % Plot
     clf %clear figure
     subplot(3,1,1)
-    axis([0 inf -2 2])
-    plot(x(i),f1(i),'k-o','MarkerFaceColor',[1 0 1])
-    hold on
-    plot(x(1:i),f1(1:i),'r', 'LineWidth', 1);
-    xlabel('x','fontweight','bold','fontsize',10); 
-    xlim([0 x_end]);xticks(0:10:x_end);
-    ylabel('f_{1}','fontweight','bold','fontsize',10); 
-    ylim([-3 3]);yticks(-3:1:3);
-    title('f_{1}(\phi) = Acos(\omega_{1}t - k_{1}x - \phi_{01}), {\phi}(x)');
-%
-    subplot(3,1,2)
-    axis([0 inf -2 2])
-    plot(x(i),f2(i),'k-o','MarkerFaceColor',[1 0 1])
-    hold on
-    plot(x(1:i),f2(1:i),'b', 'LineWidth', 1);
-    xlabel('x','fontweight','bold','fontsize',10); 
-    xlim([0 x_end]);xticks(0:10:x_end);
-    ylabel('f_{2}','fontweight','bold','fontsize',10); 
-    ylim([-3 3]);yticks(-3:1:3);
-    title('f_{2}(\phi) = Acos(\omega_{2}t - k_{2}x - \phi_{02}), {\phi}(x)');
-%
-    subplot(3,1,3)
-    plot(x(i),f3(i),'k-o','MarkerFaceColor',[1 0 1])
-    hold on
-    plot(x(1:i),f3(1:i),'k', 'LineWidth', 1);
-    plot(x(i),enve_f3_positive(i),'k-o','MarkerFaceColor','g')
-    plot(x(1:i),enve_f3_positive(1:i),'r--', 'LineWidth', 0.75);
-    plot(x(1:i),enve_f3_negative(1:i),'b--', 'LineWidth', 0.75);
+        axis([0 inf -2 2])
+        plot(x(i),f1(i),'k-o','MarkerFaceColor',[1 0 1])
+        hold on
+        plot(x(1:i),f1(1:i),'r', 'LineWidth', 1);
+        xlabel('x','fontweight','bold','fontsize',10); 
+        xlim([0 x_end]);xticks(0:10:x_end);
+        ylabel('f_{1}','fontweight','bold','fontsize',10); 
+        ylim([-3 3]);yticks(-3:1:3);
+        title('f_{1}(\phi) = Acos(\omega_{1}t - k_{1}x - \phi_{01}), {\phi}(x)');
     %
-    xlabel('x','fontweight','bold','fontsize',10); 
-    xlim([0 x_end]);xticks(0:10:x_end);
-    ylabel('f_{3}','fontweight','bold','fontsize',10); 
-    ylim([-5 5]);yticks(-5:1:5);
-    title('f_{3}(\phi) = f_{2}(\phi) + f_{1}(\phi), {\phi}(x)');
-%
+    subplot(3,1,2)
+        axis([0 inf -2 2])
+        plot(x(i),f2(i),'k-o','MarkerFaceColor',[1 0 1])
+        hold on
+        plot(x(1:i),f2(1:i),'b', 'LineWidth', 1);
+        xlabel('x','fontweight','bold','fontsize',10); 
+        xlim([0 x_end]);xticks(0:10:x_end);
+        ylabel('f_{2}','fontweight','bold','fontsize',10); 
+        ylim([-3 3]);yticks(-3:1:3);
+        title('f_{2}(\phi) = Acos(\omega_{2}t - k_{2}x - \phi_{02}), {\phi}(x)');
+    %
+    subplot(3,1,3)
+        plot(x(i),f3(i),'k-o','MarkerFaceColor',[1 0 1])
+        hold on
+        plot(x(1:i),f3(1:i),'k', 'LineWidth', 1);
+        plot(x(i),enve_f3_positive(i),'k-o','MarkerFaceColor','g')
+        plot(x(1:i),enve_f3_positive(1:i),'r--', 'LineWidth', 0.75);
+        plot(x(1:i),enve_f3_negative(1:i),'b--', 'LineWidth', 0.75);
+        %
+        xlabel('x','fontweight','bold','fontsize',10); 
+        xlim([0 x_end]);xticks(0:10:x_end);
+        ylabel('f_{3}','fontweight','bold','fontsize',10); 
+        ylim([-5 5]);yticks(-5:1:5);
+        title('f_{3}(\phi) = f_{2}(\phi) + f_{1}(\phi), {\phi}(x)');
+    %
     pause(0.01)
     frame = getframe(gcf); 
     writeVideo(video,frame);
