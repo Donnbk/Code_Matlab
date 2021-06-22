@@ -95,7 +95,7 @@ for j = 1:m_t
         plot(x(j),f3_t(j,j),'k-o','MarkerFaceColor',[1 0 1]); 
         plot(x(j),enve_f3_positive(j),'k-o','MarkerFaceColor','g');
         hold off
-        t_iter = t_iter + dt_iter;
+    t_iter = t_iter + dt_iter;
     %
     pause(0.01)
     frame = getframe(gcf); 
