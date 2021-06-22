@@ -10,7 +10,7 @@ w2 = 2; k2 = 1.1; phi_02 = 2;
 t_start = 0; t_end = 20; dt_iter = 0.1; t_iter = 0;
 x_start = -50; x_end = 50; dx_iter = 0.5; x_iter = 0; 
 %%
-% Create vector for x,f1, f2, f3, T_matrix
+% Create vector for x, f1, f2, f3, T_matrix
 n_x = round((x_end-x_start)/dx_iter) + 1; %number of frames
 x = zeros(1,n_x); f1 = zeros(1,n_x); f2 = zeros(1,n_x);f3 = zeros(1,n_x);
 m_t = round((t_end-t_iter)/dt_iter) + 1;
