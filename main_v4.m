@@ -5,11 +5,9 @@ clc; close all;
 %%
 % In put
 A = 2;
-vp1 = 1; vp2 = -1.81;
-lamda_1 = 6.28; lamda_2 = 5.69;
-w1 = vp1*2*pi()/lamda_1; k1 = 2*pi()/lamda_1; phi_01 = 0;
-w2 = vp2*2*pi()/lamda_2; k2 = 2*pi()/lamda_2; phi_02 = 0; 
-t_start = 0; t_end = 100; dt_iter = 0.5; t_iter = 0;
+w1 = 0.1; k1 = 0.3; phi_01 = 0;
+w2 = 0.7; k2 = 0.5; phi_02 = 0; 
+t_start = 0; t_end = 20; dt_iter = 0.1; t_iter = 0;
 x_start = -50; x_end = 50; dx_iter = 0.5; x_iter = 0; 
 %%
 % Create vector for x, f1, f2, f3, T_matrix
@@ -20,7 +18,7 @@ m_t = round((t_end-t_iter)/dt_iter) + 1;
 T_matrix = zeros(m_t,1); f3_t = zeros(m_t,n_x);
 %%
 % Create a video
-video = VideoWriter('waves_v2.avi');
+video = VideoWriter('waves_v4.avi');
 open(video);
 % Set figure
 figure('Position',[200 200 800 800]);
@@ -39,32 +37,32 @@ for j = 1:m_t
     f3_t(j,i) = f3(i);
     enve_f3_positive =  2*A*cos( (w1-w2)/2*t - (k1-k2)/2*x - (phi_01-phi_02)/2 );
     enve_f3_negative = -2*A*cos( (w1-w2)/2*t - (k1-k2)/2*x - (phi_01-phi_02)/2 );
-% Plot
+    % Plot
     clf %clear figure
     % Line
-%     subplot(3,1,1)
-%         axis([0 inf -2 2])
-%         plot(x(1:i),f1(1:i),'r', 'LineWidth', 1);
-%         hold on
-%         %
-%         xlabel('x','fontweight','bold','fontsize',10); 
-%         xlim([x_start x_end]);xticks(x_start:10:x_end);
-%         ylabel('f_{1}','fontweight','bold','fontsize',10); 
-%         ylim([-3 3]);yticks(-3:1:3);
-%         title('f_{1}(\phi) = Acos(\omega_{1}t - k_{1}x - \phi_{01}), {\phi}(x,t)');
-%         hold off
-%     %
-%     subplot(3,1,2)
-%         axis([0 inf -2 2])
-%         hold on
-%         plot(x(1:i),f2(1:i),'b', 'LineWidth', 1);
-%         %
-%         xlabel('x','fontweight','bold','fontsize',10); 
-%         xlim([x_start x_end]);xticks(x_start:10:x_end);
-%         ylabel('f_{2}','fontweight','bold','fontsize',10); 
-%         ylim([-3 3]);yticks(-3:1:3);
-%         title('f_{2}(\phi) = Acos(\omega_{2}t - k_{2}x - \phi_{02}), {\phi}(x,t)');
-%         hold off
+    subplot(3,1,1)
+        axis([0 inf -2 2])
+        plot(x(1:i),f1(1:i),'r', 'LineWidth', 1);
+        hold on
+        %
+        xlabel('x','fontweight','bold','fontsize',10); 
+        xlim([x_start x_end]);xticks(x_start:10:x_end);
+        ylabel('f_{1}','fontweight','bold','fontsize',10); 
+        ylim([-3 3]);yticks(-3:1:3);
+        title('f_{1}(\phi) = Acos(\omega_{1}t - k_{1}x - \phi_{01}), {\phi}(x,t)');
+        hold off
+    %
+    subplot(3,1,2)
+        axis([0 inf -2 2])
+        hold on
+        plot(x(1:i),f2(1:i),'b', 'LineWidth', 1);
+        %
+        xlabel('x','fontweight','bold','fontsize',10); 
+        xlim([x_start x_end]);xticks(x_start:10:x_end);
+        ylabel('f_{2}','fontweight','bold','fontsize',10); 
+        ylim([-3 3]);yticks(-3:1:3);
+        title('f_{2}(\phi) = Acos(\omega_{2}t - k_{2}x - \phi_{02}), {\phi}(x,t)');
+        hold off
     %
     subplot(3,1,3)
         plot(x(1:i),f3(1:i),'k', 'LineWidth', 1);
@@ -80,26 +78,23 @@ for j = 1:m_t
         hold off
     end
     % Point
-%     subplot(3,1,1)
-%         hold on
-%         plot(x(j),f1(j),'k-o','MarkerFaceColor',[1 0 1]); 
-%         hold off
-%     %
-%     subplot(3,1,2)
-%         hold on
-%         plot(x(m_t-j+1),f2(m_t-j+1),'k-o','MarkerFaceColor',[1 0 1]); 
-%         hold off
+    subplot(3,1,1)
+        hold on
+        plot(x(j),f1(j),'k-o','MarkerFaceColor','m'); 
+        hold off
+    %
+    subplot(3,1,2)
+        hold on
+        plot(x(j),f2(j),'k-o','MarkerFaceColor','m'); 
+        hold off
     %
     subplot(3,1,3)
         hold on
-        %[p_f3_max,i_f3_max] = max(f3);
-        %plot(x(i_f3_max),f3(i_f3_max),'k-o','MarkerFaceColor','b');
-        plot(x(i),f3(i),'k-o','MarkerFaceColor','b');
         [p_envef3_max,i_envef3_max] = max(enve_f3_positive);
-        plot(x(i_envef3_max),enve_f3_positive(i_envef3_max),'k-o','MarkerFaceColor','r');
+        plot(x(i_envef3_max),enve_f3_positive(i_envef3_max),'k-s','MarkerFaceColor','r');
         %
-        plot(x(j),f3_t(j,j),'k-o','MarkerFaceColor',[1 0 1]); 
-        plot(x(j),enve_f3_positive(j),'k-o','MarkerFaceColor','g');
+        plot(x(j),f3_t(j,j),'k-o','MarkerFaceColor','m'); 
+%         plot(x(j),enve_f3_positive(j),'k-o','MarkerFaceColor','g');
         hold off
     t_iter = t_iter + dt_iter;
     %
