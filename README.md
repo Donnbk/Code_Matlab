@@ -20,6 +20,8 @@ This code is created by Do Ngo-Ngoc (ngongocdobk@gmail.com), Department of Struc
 
 - [Lecture notes of David Morin](https://bit.ly/3vN3wAU)
 
+- [Phase velocity - Wikipedia](https://bit.ly/3wQesPu)
+
 ### Note:
 
 - This code is created with the purpose of reference. 
