@@ -12,6 +12,10 @@ This code is created by Do Ngo-Ngoc (ngongocdobk@gmail.com), Department of Struc
 
 ![waves_v2](https://github.com/Donnbk/Matlab_Waves_function/blob/master/figure/waves_v2.gif)
 
+### The Phase velocity and Group velocity (main_v4.m)
+
+![waves_v2](https://github.com/Donnbk/Matlab_Waves_function/blob/master/figure/waves_v4.gif)
+
 ### Reference:
 
 - [Channel: Dr.Stephen Remillard](https://bit.ly/3zDbkYK)
