@@ -5,15 +5,15 @@ clc; close all;
 %%
 % In put
 A = 2;
-w1 = 0.1; k1 = 0.3; phi_01 = 0;
-w2 = 0.7; k2 = 0.5; phi_02 = 0; 
-t_start = 0; t_end = 20; dt_iter = 0.1; t_iter = 0;
-x_start = -50; x_end = 50; dx_iter = 0.5; x_iter = 0; 
+w1 = 2.5; k1 = 2.25; phi_01 = 0;
+w2 = 1.5; k2 = 1.75; phi_02 = 0; 
+t_start = 0; t_end = 30; dt_iter = 0.2; t_iter = 0;
+x_start = 0; x_end = 30; dx_iter = 0.2; x_iter = 0; 
 %%
 % Create vector for x, f1, f2, f3, T_matrix
 n_x = round((x_end-x_start)/dx_iter) + 1; %number of frames
 x = zeros(1,n_x); 
-f1 = zeros(1,n_x); f2 = zeros(1,n_x);f3 = zeros(1,n_x);
+f1 = zeros(1,n_x); f2 = zeros(1,n_x); f3 = zeros(1,n_x);
 m_t = round((t_end-t_iter)/dt_iter) + 1;
 T_matrix = zeros(m_t,1); f3_t = zeros(m_t,n_x);
 %%
@@ -94,7 +94,7 @@ for j = 1:m_t
         plot(x(i_envef3_max),enve_f3_positive(i_envef3_max),'k-s','MarkerFaceColor','r');
         %
         plot(x(j),f3_t(j,j),'k-o','MarkerFaceColor','m'); 
-%         plot(x(j),enve_f3_positive(j),'k-o','MarkerFaceColor','g');
+        plot(x(j),enve_f3_positive(j),'k-o','MarkerFaceColor','g');
         hold off
     t_iter = t_iter + dt_iter;
     %
@@ -103,4 +103,4 @@ for j = 1:m_t
     writeVideo(video,frame);
 end
 close(video);
-print('figure_v2','-dpdf');
+print('figure_v4','-dpdf');
