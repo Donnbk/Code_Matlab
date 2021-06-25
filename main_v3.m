@@ -9,8 +9,8 @@ vp1 = 1; vp2 = -1.81;
 lamda_1 = 6.28; lamda_2 = 5.69;
 w1 = vp1*2*pi()/lamda_1; k1 = 2*pi()/lamda_1; phi_01 = 0;
 w2 = vp2*2*pi()/lamda_2; k2 = 2*pi()/lamda_2; phi_02 = 0; 
-t_start = 0; t_end = 20; dt_iter = 0.1; t_iter = 0;
-x_start = -50; x_end = 50; dx_iter = 0.5; x_iter = 0; 
+t_start =   0; t_end =  5; dt_iter =     0.1; t_iter = 0;
+x_start = -50; x_end = 50; dx_iter = dt_iter; x_iter = 0; 
 %%
 % Create vector for x, f1, f2, f3, T_matrix
 n_x = round((x_end-x_start)/dx_iter) + 1; %number of frames
@@ -18,9 +18,12 @@ x = zeros(1,n_x);
 f1 = zeros(1,n_x); f2 = zeros(1,n_x); f3 = zeros(1,n_x);
 m_t = round((t_end-t_iter)/dt_iter) + 1;
 T_matrix = zeros(m_t,1); f3_t = zeros(m_t,n_x);
+x_P1 = zeros(1,m_t); f1_vp = zeros(1,m_t);
+x_P2 = zeros(1,m_t); f2_vp = zeros(1,m_t);
+x_P3 = zeros(1,m_t); f3_vp = zeros(1,m_t);
 %%
 % Create a video
-video = VideoWriter('waves_v2.avi');
+video = VideoWriter('waves_v3.avi');
 open(video);
 % Set figure
 figure('Position',[200 200 800 800]);
@@ -39,6 +42,21 @@ for j = 1:m_t
     f3_t(j,i) = f3(i);
     enve_f3_positive =  2*A*cos( (w1-w2)/2*t - (k1-k2)/2*x - (phi_01-phi_02)/2 );
     enve_f3_negative = -2*A*cos( (w1-w2)/2*t - (k1-k2)/2*x - (phi_01-phi_02)/2 );
+    if (w1)/(k1)*t >= 0
+        x_P1(j) = (w1)/(k1)*t;    
+    else
+        x_P1(j) = (w2)/(k2)*t + x_end;
+    end
+    %
+    if (w2)/(k2)*t >= 0
+        x_P2(j) = (w2)/(k2)*t;    
+    else
+        x_P2(j) = (w2)/(k2)*t + x_end;
+    end
+    x_P3(j) = (w1+w2)/(k1+k2)*t;
+    f1_vp(j) = A*cos(k1*x_P1(j)-w1*t);
+    f2_vp(j) = A*cos(k2*x_P2(j)-w2*t);
+    f3_vp = 2*A*cos( (w1-w2)/2*t - (k1-k2)/2*x_P3 - (phi_01-phi_02)/2 );
 % Plot
     clf %clear figure
     % Line
@@ -82,18 +100,21 @@ for j = 1:m_t
     % Point
     subplot(3,1,1)
         hold on
-        plot(x(j),f1(j),'k-o','MarkerFaceColor',[1 0 1]); 
+        plot(x_P1(j),f1_vp(j),'k-o','MarkerFaceColor','m'); 
         hold off
     %
     subplot(3,1,2)
         hold on
-        plot(x(m_t-j+1),f2(m_t-j+1),'k-o','MarkerFaceColor',[1 0 1]); 
+        plot(x_P2(j),f2_vp(j),'k-o','MarkerFaceColor','m') 
         hold off
     %
     subplot(3,1,3)
         hold on
-        plot(x(j),f3_t(j,j),'k-o','MarkerFaceColor',[1 0 1]); 
-        plot(x(j),enve_f3_positive(j),'k-o','MarkerFaceColor','g');
+        [p_envef3_max,i_envef3_max] = max(enve_f3_positive);
+        plot(x(i_envef3_max),enve_f3_positive(i_envef3_max),'k-s','MarkerFaceColor','r');
+        %plot(dw/dk*t,2*A,'k-s','MarkerFaceColor','k');
+        %
+        plot(x_P3(j),f3_vp(j),'k-o','MarkerFaceColor','g');     
         hold off
     t_iter = t_iter + dt_iter;
     %
