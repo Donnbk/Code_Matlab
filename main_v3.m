@@ -5,19 +5,19 @@ clc; close all;
 %%
 % In put
 A = 2;
-vp1 = 1; vp2 = -1.81;
-lamda_1 = 6.28; lamda_2 = 5.69;
+vp1 = 1; vp2 = -0.75;
+lamda_1 = 0.8*pi(); lamda_2 = pi();
 w1 = vp1*2*pi()/lamda_1; k1 = 2*pi()/lamda_1; phi_01 = 0;
 w2 = vp2*2*pi()/lamda_2; k2 = 2*pi()/lamda_2; phi_02 = 0; 
-t_start = 0; t_end =  5; dt_iter =     0.1; t_iter = 0;
-x_start = 0; x_end = 100; dx_iter = dt_iter; x_iter = 0; 
+t_start = 0; t_end =  0.1; dt_iter =     0.1; t_iter = 0;
+x_start = -20; x_end = 20; dx_iter = dt_iter; x_iter = 0; 
 %%
 % Create vector for x, f1, f2, f3, T_matrix
 n_x = round((x_end-x_start)/dx_iter) + 1; %number of frames
 x = zeros(1,n_x); 
 f1 = zeros(1,n_x); f2 = zeros(1,n_x); f3 = zeros(1,n_x);
 m_t = round((t_end-t_iter)/dt_iter) + 1;
-T_matrix = zeros(m_t,1); f3_t = zeros(m_t,n_x);
+T_matrix = zeros(m_t,1); 
 x_P1 = zeros(1,m_t); f1_vp = zeros(1,m_t);
 x_P2 = zeros(1,m_t); f2_vp = zeros(1,m_t);
 x_P3 = zeros(1,m_t); f3_vp = zeros(1,m_t);
@@ -39,20 +39,11 @@ for j = 1:m_t
     f1(i) = A*cos(w1*t - k1*x(i) - phi_01); 
     f2(i) = A*cos(w2*t - k2*x(i) - phi_02);
     f3(i) = f1(i) + f2(i);
-    f3_t(j,i) = f3(i);
     enve_f3_positive =  2*A*cos( (w1-w2)/2*t - (k1-k2)/2*x - (phi_01-phi_02)/2 );
     enve_f3_negative = -2*A*cos( (w1-w2)/2*t - (k1-k2)/2*x - (phi_01-phi_02)/2 );
-    if (w1)/(k1)*t >= 0
-        x_P1(j) = (w1)/(k1)*t;    
-    else
-        x_P1(j) = (w2)/(k2)*t + x_end;
-    end
-    %
-    if (w2)/(k2)*t >= 0
-        x_P2(j) = (w2)/(k2)*t;    
-    else
-        x_P2(j) = (w2)/(k2)*t + x_end;
-    end
+    % Phase velocity and Group velocity
+    x_P1(j) = (w1)/(k1)*t;    
+    x_P2(j) = (w2)/(k2)*t;    
     x_P3(j) = (w1+w2)/(k1+k2)*t;
     f1_vp(j) = A*cos(k1*x_P1(j)-w1*t);
     f2_vp(j) = A*cos(k2*x_P2(j)-w2*t);
@@ -69,7 +60,8 @@ for j = 1:m_t
         xlim([x_start x_end]);xticks(x_start:10:x_end);
         ylabel('f_{1}','fontweight','bold','fontsize',10); 
         ylim([-3 3]);yticks(-3:1:3);
-        title('f_{1}(\phi) = Acos(\omega_{1}t - k_{1}x - \phi_{01}), {\phi}(x,t)');
+        title("\color{red}t = " + num2str(t), 'FontSize', 16);  
+        subtitle('f_{1}(\phi) = Acos(\omega_{1}t - k_{1}x - \phi_{01}), {\phi}(x,t)','fontweight','bold','FontSize', 10);
         hold off
     %
     subplot(3,1,2)
@@ -81,7 +73,7 @@ for j = 1:m_t
         xlim([x_start x_end]);xticks(x_start:10:x_end);
         ylabel('f_{2}','fontweight','bold','fontsize',10); 
         ylim([-3 3]);yticks(-3:1:3);
-        title('f_{2}(\phi) = Acos(\omega_{2}t - k_{2}x - \phi_{02}), {\phi}(x,t)');
+        title('f_{2}(\phi) = Acos(\omega_{2}t - k_{2}x - \phi_{02}), {\phi}(x,t)','FontSize', 10);
         hold off
     %
     subplot(3,1,3)
@@ -94,7 +86,7 @@ for j = 1:m_t
         xlim([x_start x_end]);xticks(x_start:10:x_end);
         ylabel('f_{3}','fontweight','bold','fontsize',10); 
         ylim([-5 5]);yticks(-5:1:5);
-        title('f_{3}(\phi) = f_{2}(\phi) + f_{1}(\phi), {\phi}(x,t)');
+        title('f_{3}(\phi) = f_{2}(\phi) + f_{1}(\phi), {\phi}(x,t)','FontSize', 10);
         hold off
     end
     % Point
@@ -118,7 +110,7 @@ for j = 1:m_t
         hold off
     t_iter = t_iter + dt_iter;
     %
-    pause(0.01)
+    pause(0.1)
     frame = getframe(gcf); 
     writeVideo(video,frame);
 end
