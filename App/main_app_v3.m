@@ -9,8 +9,8 @@ vp1 = 1; vp2 = -0.75;
 lamda_1 = 0.8*pi(); lamda_2 = pi();
 w1 = vp1*2*pi()/lamda_1; k1 = 2*pi()/lamda_1; phi_01 = 0;
 w2 = vp2*2*pi()/lamda_2; k2 = 2*pi()/lamda_2; phi_02 = 0; 
-t_start =   0; t_end =  10; dt_iter =     0.1; t_iter = 0;
-x_start = -20; x_end = 20; dx_iter = dt_iter; x_iter = 0; 
+t_start =   0; t_end = 0.1; dt_iter =     0.1; t_iter = 0;
+x_start = -20; x_end =  20; dx_iter = dt_iter; x_iter = 0; 
 %%
 % Create vector for x, f1, f2, f3, T_matrix
 n_x = round((x_end-x_start)/dx_iter) + 1; %number of frames
