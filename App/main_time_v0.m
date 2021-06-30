@@ -45,8 +45,8 @@ for j = 1:m_t
     x_P1(j) = (w1)/(k1)*t;    
     x_P2(j) = (w2)/(k2)*t;    
     x_P3(j) = (w1+w2)/(k1+k2)*t;
-    f1_vp(j) = A*cos(k1*x_P1(j)-w1*t);
-    f2_vp(j) = A*cos(k2*x_P2(j)-w2*t);
+    f1_vp(j) = A*cos(k1*x_P1(j)-w1*t - phi_01);
+    f2_vp(j) = A*cos(k2*x_P2(j)-w2*t - phi_02);
     f3_vp = 2*A*cos( (w1-w2)/2*t - (k1-k2)/2*x_P3 - (phi_01-phi_02)/2 );
 % Plot
     clf %clear figure
