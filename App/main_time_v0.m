@@ -60,7 +60,7 @@ for j = 1:m_t
         xlim([x_start x_end]);xticks(x_start:10:x_end);
         ylabel('f_{1}','fontweight','bold','fontsize',10); 
         ylim([-3 3]);yticks(-3:1:3);
-        title("\color{red}t = " + num2str(t), 'FontSize', 16);  
+        title("\color{red}t = " + num2str(t) + "s", 'FontSize', 16);  
         subtitle('f_{1}(\phi) = Acos(\omega_{1}t - k_{1}x - \phi_{01}), {\phi}(x,t)','fontweight','bold','FontSize', 10);
         hold off
     %
