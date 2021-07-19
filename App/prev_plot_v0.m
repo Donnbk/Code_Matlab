@@ -30,28 +30,31 @@ for i=1:n
 end
 % Plot
     subplot(3,1,1)
-        axis([0 inf -2 2])
+        axis([0 inf -(A+1) (A+1)])
         plot(x(i),f1(i),'k-o','MarkerFaceColor',[1 0 1])
         hold on
         plot(x(1:i),f1(1:i),'r', 'LineWidth', 1);
-        xlabel('x','fontweight','bold','fontsize',10); 
-        xlim([x_start x_end]);xticks(x_start:10:x_end);
-        ylabel('f_{1}','fontweight','bold','fontsize',10); 
-        ylim([-3 3]);yticks(-3:1:3);
-        title('f_{1}(\phi) = Acos(\omega_{1}t - k_{1}x - \phi_{01}), {\phi}(x)');
+        xlabel(['$x$'],'fontweight','bold','fontsize',14,'interpreter','latex'); 
+        xlim([x_start x_end]);
+        set(gca, 'XTickLabel', {x_start:10:x_end}, 'TickLabelInterpreter', 'latex');
+        ylabel(['$f_{1}$'],'fontweight','bold','fontsize',14,'interpreter','latex'); 
+        ylim([-(A+1) (A+1)]);yticks(-(A+1):1:(A+1));
+        title(['$f_{1}(\phi) = Acos(\omega_{1}t - k_{1}x - \phi_{01}), \, {\phi}(x)$'],'fontsize',14,'interpreter','latex');
     %
     subplot(3,1,2)
-        axis([0 inf -2 2])
+        axis([0 inf -(A+1) (A+1)])
         plot(x(i),f2(i),'k-o','MarkerFaceColor',[1 0 1])
         hold on
         plot(x(1:i),f2(1:i),'b', 'LineWidth', 1);
-        xlabel('x','fontweight','bold','fontsize',10); 
-        xlim([x_start x_end]);xticks(x_start:10:x_end);
-        ylabel('f_{2}','fontweight','bold','fontsize',10); 
-        ylim([-3 3]);yticks(-3:1:3);
-        title('f_{2}(\phi) = Acos(\omega_{2}t - k_{2}x - \phi_{02}), {\phi}(x)');
+        xlabel(['$x$'],'fontweight','bold','fontsize',14,'interpreter','latex'); 
+        xlim([x_start x_end]);
+        set(gca, 'XTickLabel', {x_start:10:x_end}, 'TickLabelInterpreter', 'latex');
+        ylabel(['$f_{2}$'],'fontweight','bold','fontsize',14,'interpreter','latex'); 
+        ylim([-(A+1) (A+1)]);yticks(-(A+1):1:(A+1));
+        title(['$f_{2}(\phi) = Acos(\omega_{2}t - k_{2}x - \phi_{02}), \, {\phi}(x)$'],'fontsize',14,'interpreter','latex');
     %
     subplot(3,1,3)
+        axis([0 inf -(2*A+1) (2*A+1)])
         plot(x(i),f3(i),'k-o','MarkerFaceColor',[1 0 1])
         hold on
         plot(x(1:i),f3(1:i),'k', 'LineWidth', 1);
@@ -59,10 +62,11 @@ end
         plot(x(1:i),enve_f3_positive(1:i),'r--', 'LineWidth', 0.75);
         plot(x(1:i),enve_f3_negative(1:i),'b--', 'LineWidth', 0.75);
         %
-        xlabel('x','fontweight','bold','fontsize',10); 
-        xlim([x_start x_end]);xticks(x_start:10:x_end);
-        ylabel('f_{3}','fontweight','bold','fontsize',10); 
-        ylim([-5 5]);yticks(-5:1:5);
-        title('f_{3}(\phi) = f_{2}(\phi) + f_{1}(\phi), {\phi}(x)');
+        xlabel(['$x$'],'fontweight','bold','fontsize',14,'interpreter','latex'); 
+        xlim([x_start x_end]);
+        set(gca, 'XTickLabel', {x_start:10:x_end}, 'TickLabelInterpreter', 'latex');
+        ylabel(['$f_{3}$'],'fontweight','bold','fontsize',14,'interpreter','latex'); 
+        ylim([-(2*A+1) (2*A+1)]);yticks(-(2*A+1):1:(2*A+1));
+        title(['$f_{3}(\phi) = f_{2}(\phi) + f_{1}(\phi), \, {\phi}(x)$'],'fontsize',14,'interpreter','latex');
 % Print
 print('figure_v1','-dpdf');
