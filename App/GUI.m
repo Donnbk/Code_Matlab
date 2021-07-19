@@ -399,6 +399,11 @@ x_start = str2double(get(handles.xstart, 'string'));
 x_end   = str2double(get(handles.xend, 'string'));
 dx_iter = dt_iter;
 x_iter = 0;
+%
+vp3 = (w1+w2)/(k1+k2);
+vg3 = (w1-w2)/(k1-k2);
+set(handles.vp3, 'string', vp3);
+set(handles.vg3, 'string', vg3);
 %%
 % Create vector for x, f1, f2, f3
 n = round((x_end-x_start)/dx_iter); 
@@ -602,3 +607,19 @@ function reset_button_Callback(hObject, eventdata, handles)
 % hObject    handle to reset_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+set(handles.vp1,'string',num2str(0));
+set(handles.A, 'string',num2str(0));
+set(handles.vp1, 'string',num2str(0));
+set(handles.lamda1, 'string',num2str(0));
+set(handles.phi1, 'string',num2str(0));
+set(handles.vp2, 'string',num2str(0));
+set(handles.lamda2, 'string',num2str(0));
+set(handles.phi2, 'string',num2str(0));
+set(handles.tstart, 'string',num2str(0)); 
+set(handles.tend, 'string',num2str(0));
+set(handles.dt_iter, 'string',num2str(0));
+set(handles.xstart, 'string',num2str(0));
+set(handles.xend, 'string',num2str(0));
+set(handles.vp3,'string',num2str(0));
+set(handles.vg3,'string',num2str(0));
+clc
